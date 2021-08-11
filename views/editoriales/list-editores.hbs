@@ -1,0 +1,32 @@
+<div class="col-md-4"></div>
+<div class="col-md-4 text-center">
+    <a href="/create-editoriales" class="btn btn-success">crear nuevo editorial</a>
+</div>
+<div class="col-md-4"></div>
+<br>
+<br>
+{{#if hasEditor}}
+    {{#each Editor as |editor|}}
+    <br>
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title">{{editor.name}}</h5>
+                <h6 class="card-text mb-2 text-muted">{{editor.telefono}}</h6>
+                <p class="card-text"> {{editor.pais}}</p>
+                <a href="/edit-editoriales/{{editor.id}}?edit=true" class="btn btn-warning">editar</a>
+                <form id="form-delete-editores" class="form-inline" action="/delete-editoriales" method="post">
+                <input type="hidden" name="editorId" value="{{editor.id}}">
+                <button id="delete-editores" type="submit" class="btn btn-danger">borrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+{{else}}
+ <br>
+ <br>
+ <br>
+ <br>
+<h1 class="card-title text-center">No hay editoreales creados</h1>
+{{/if}}

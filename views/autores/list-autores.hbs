@@ -1,0 +1,32 @@
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <a href="/create-autores" class="btn btn-success">crear nuevo autor</a>
+        </div>
+        <br>
+        <br>
+{{#if hasAutor}}
+        <div class="col-md-4"></div>
+        {{#each Autor as |auto|}}
+            <div class="col-md-4">
+                <br>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">{{auto.name}}</h5>
+                        <p class="card-text">{{auto.email}}</p>
+                        <a href="/edit-autores/{{auto.id}}?edit=true" class="btn btn-warning">editar</a>
+                        <form id="form-delete-autores" class="form-inline" action="/delete-autor" method="post">
+                        <input type="hidden" name="autorId" value="{{auto.id}}">
+                        <button id="delete-autores" type="submit" class="btn btn-danger">borrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         {{/each}}
+{{else}}
+ <br>
+ <br>
+ <br>
+ <br>
+<h1 class="card-title text-center">No hay autores creados</h1>
+{{/if}}

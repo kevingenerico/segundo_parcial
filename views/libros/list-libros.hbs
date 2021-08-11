@@ -1,0 +1,34 @@
+<div class="col-md-4"></div>
+<div class="col-md-4 text-center">
+    <a href="/create-libros" class="btn btn-success">crear nuevo libro</a>
+</div>
+<div class="col-md-4"></div>
+<br>
+<br>
+{{#if hasLibro}}
+    {{#each Libro as |libro|}}
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title">{{libro.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">#{{libro.id}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{libro.fecha}}</h6>
+                <h6 class="card-subtitle mb-2">{{libro.autore.dataValues.name}}</h6>
+                <h6 class="card-subtitle mb-2 ">{{libro.editore.dataValues.name}} ----- {{libro.editore.dataValues.pais}}</h6>
+
+                <a href="/edit-libros/{{libro.id}}?edit=true" class="btn btn-warning">editar</a>
+                <form id="form-delete-libro" class="form-inline" action="/delete-libros" method="post">
+                <input type="hidden" name="librosId" value="{{libro.id}}">
+                <button type="submit" id="delete-libros" class="btn btn-danger">borrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+ {{else}}
+ <br>
+ <br>
+ <br>
+ <br>
+ <h1 class="card-title text-center">no hay libros creados</h1>
+ {{/if}}

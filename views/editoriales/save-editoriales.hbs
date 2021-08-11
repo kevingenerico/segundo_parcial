@@ -1,0 +1,34 @@
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header bg-dark text-white">
+             <h5 class="card-title text-center"> {{#if editMode}}Edicion{{else}}Creacion{{/if}} de editorial</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{#if editMode}}/edit-editoriales{{else}}/create-editoriales{{/if}}" method="POST">
+                <div>
+                <label for="name">nombre</label>
+                <input type="text" name="name" class="form-control" value="{{#if editMode}}{{Editor.name}}{{/if}}">
+                </div>
+                <div>
+                    <label for="phone">telefono</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" placeholder="000-000-0000" value="{{#if editMode}}{{Editor.telefono}}{{/if}}">
+                </div>
+                <div>
+                    <label for="pais">pais</label>
+                    <input type="text" name="pais" class="form-control" value="{{#if editMode}}{{Editor.pais}}{{/if}}">
+                </div>
+          {{#if editMode}}
+
+          <input type="hidden" name="editorId" value="{{Editor.id}}">
+          
+          {{/if}}
+                 <br>
+                <button type="submit" class="btn btn-primary">guardar</button>
+                <a href="/list-editoriales" class="btn btn-danger">cancelar</a>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-4"></div>

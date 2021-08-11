@@ -1,0 +1,71 @@
+<div class="col-md-4"></div>
+<div class="col-md-4">
+{{#if hasEditor}}
+    {{#if hasAutor}}
+    <div class="card" style="width: 18rem;">
+        <div class="card-header bg-dark text-white">
+             <h5 class="card-title text-center"> {{#if editMode}}Edicion{{else}}Creacion{{/if}} de libros</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{#if editMode}}/edit-libros{{else}}/create-libros{{/if}}" method="POST">
+                <div>
+                    <label class="mr-sm-2" for="name">nombre</label>
+                    <input type="text" name="name" class="form-control" value="{{#if editMode}}{{Libro.name}}{{/if}}">
+                </div>
+                <div>
+                    <label class="mr-sm-2" for="email">fecha de publicacion</label>
+                    <input type="text" name="fecha" id="fecha" class="form-control" placeholder="dd/mm/aaaa" value="{{#if editMode}}{{Libro.fecha}}{{/if}}" >
+                </div>
+                <div>
+                    <label class="mr-sm-2" for="autor">autor</label>
+                    <select class="custom-select form-control" id="autor" name="autor">
+                        <option{{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+              {{#each Autor as |autor|}}
+                  {{#if (equalValue autor.id ../Libro.autoreId )}}
+                  <option selected value="{{autor.id}}">{{autor.name}}</option>
+                  {{else}}
+                   <option value="{{autor.id}}">{{autor.name}}</option>
+                  {{/if}}
+                
+               {{/each}}
+              
+                    </select>
+                </div>
+                 <div>
+                    <label class="mr-sm-2" for="editoreal">editorial</label>
+                    <select class="custom-select my-1 mr-sm-2 form-control" id="editorial" name="editorial" required>
+                        <option{{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+              {{#each Editor as |editor|}}
+
+                  {{#if (equalValue editor.id ../Libro.editoreId )}}
+                  <option selected value="{{editor.id}}">{{editor.name}}</option>
+                  {{else}}
+                  <option value="{{editor.id}}">{{editor.name}}</option>
+                  {{/if}}
+                
+                 
+               {{/each}}
+              
+                    </select>
+                </div>
+          {{#if editMode}}
+
+          <input type="hidden" name="librosId" value="{{Libro.id}}">
+          
+          {{/if}}
+                 <br>
+                <button type="submit" class="btn btn-primary">guardar</button>
+                <a href="/list-libros" class="btn btn-danger">cancelar</a>
+            </form>
+
+        </div>
+    </div>
+    {{else}}
+    <h1 class="card-title text-center">No hay autores creados</h1>
+    {{/if}}
+{{else}}
+<h1 class="card-title text-center">No hay editoreales creados</h1>
+{{/if}}
+
+</div>
+<div class="col-md-4"></div>
